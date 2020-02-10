@@ -1,0 +1,23 @@
+version: '3'
+services:
+  coral-backend:
+    build:
+      context: .
+    depends_on:
+      - mongo
+    ports:
+      - "3000:3000"
+    networks:
+      - revu-backend
+  mongo:
+    image: "mongo:latest"
+    container_name: coral-db
+    environment:
+      - MONGODB_DATABASE=coral-db
+      - MONGO_INITDB_DATABASE=revu-db
+    ports:
+      - "27017:27017"
+    networks:
+      - revu-backend
+networks:
+  revu-backend:
